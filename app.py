@@ -1,5 +1,5 @@
 import os
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, jsonify
 from flask_jwt_extended import JWTManager
 from controllers.category_controller import category_bp
 from controllers.otp_controller import otp_bp
@@ -41,6 +41,11 @@ app.register_blueprint(role_bp)
 @app.route('/images/<filename>')
 def serve_image(filename):
     return send_from_directory('images', filename)
+
+
+@app.route('/')
+def ping():
+    return jsonify({"Hello!": "Welcome!"}), 200
 
 
 if __name__ == "__main__":
